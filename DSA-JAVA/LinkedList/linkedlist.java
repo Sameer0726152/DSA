@@ -16,6 +16,21 @@ public class linkedlist {
 
         Node head;
 
+        void display() {
+            Node temp = head;
+            while (temp != null) {
+                System.err.print(temp.data + " ");
+                temp = temp.next;
+            }
+            System.err.println("");
+        }
+
+        void insertfirst(int value) {
+            Node newnode = new Node(value);
+            newnode.next = head;
+            head = newnode;
+        }
+
         void insertlast(int value) {
             Node newnode = new Node(value);
             if (head == null) {
@@ -28,6 +43,28 @@ public class linkedlist {
             }
             temp.next = newnode;
         }
+
+        void deletefirst() {
+            if (head == null) {
+                return;
+            }
+            head = head.next;
+        }
+
+        void deletelast() {
+            Node temp = head;
+            if (head == null) {
+                return;
+            }
+            if (head.next == null) {
+                head = null;
+                return;
+            }
+            while (temp.next.next != null) {
+                temp = temp.next;
+            }
+            temp.next = null;
+        }
     }
 
     public static void main(String[] args) {
@@ -37,10 +74,22 @@ public class linkedlist {
         list.insertlast(30);
         list.insertlast(40);
         list.insertlast(50);
-        Node temp = list.head;
-        while (temp != null) {
-            System.err.print(temp.data + " ");
-            temp = temp.next;
-        }
+
+        list.display();
+
+        list.insertfirst(60);
+        list.insertfirst(70);
+
+        list.display();
+
+        list.deletefirst();
+        list.deletefirst();
+
+        list.display();
+
+        list.deletelast();
+        list.deletelast();
+
+        list.display();
     }
 }
