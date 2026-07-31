@@ -15,22 +15,32 @@ public class linkedlist {
     static class LinkedList {
 
         Node head;
+
+        void insertlast(int value) {
+            Node newnode = new Node(value);
+            if (head == null) {
+                head = newnode;
+                return;
+            }
+            Node temp = head;
+            while (temp.next != null) {
+                temp = temp.next;
+            }
+            temp.next = newnode;
+        }
     }
 
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        Node first = new Node(10);
-        Node second = new Node(20);
-        Node third = new Node(35);
-        int sum = 0;
-        first.next = second;
-        second.next = third;
-        list.head = first;
+        list.insertlast(10);
+        list.insertlast(20);
+        list.insertlast(30);
+        list.insertlast(40);
+        list.insertlast(50);
         Node temp = list.head;
         while (temp != null) {
-            sum += temp.data;
+            System.err.print(temp.data + " ");
             temp = temp.next;
         }
-        System.err.println("Sum: " + sum);
     }
 }
