@@ -19,10 +19,10 @@ public class linkedlist {
         void display() {
             Node temp = head;
             while (temp != null) {
-                System.err.print(temp.data + " ");
+                System.out.print(temp.data + " ");
                 temp = temp.next;
             }
-            System.err.println("");
+            System.out.println("");
         }
 
         void insertfirst(int value) {
@@ -41,6 +41,29 @@ public class linkedlist {
             while (temp.next != null) {
                 temp = temp.next;
             }
+            temp.next = newnode;
+        }
+
+        void insertat(int key, int value) {
+            if (key < 0) {
+                return;
+            }
+            if (key == 0) {
+                insertfirst(value);
+                return;
+            }
+            Node temp = head;
+            for (int i = 0; i < key - 1; i++) {
+                if (temp == null) {
+                    return;
+                }
+                temp = temp.next;
+            }
+            if (temp == null) {
+                return;
+            }
+            Node newnode = new Node(value);
+            newnode.next = temp.next;
             temp.next = newnode;
         }
 
@@ -65,6 +88,27 @@ public class linkedlist {
             }
             temp.next = null;
         }
+
+        void deleteat(int key) {
+            if (key < 0) {
+                return;
+            }
+            if (key == 0) {
+                deletefirst();
+                return;
+            }
+            Node temp = head;
+            for (int i = 0; i < key - 1; i++) {
+                if (temp == null) {
+                    return;
+                }
+                temp = temp.next;
+            }
+            if (temp.next == null || temp.next.next == null) {
+                return;
+            }
+            temp.next = temp.next.next;
+        }
     }
 
     public static void main(String[] args) {
@@ -74,21 +118,35 @@ public class linkedlist {
         list.insertlast(30);
         list.insertlast(40);
         list.insertlast(50);
+        System.out.println("Inserted 5 elements");
 
         list.display();
 
         list.insertfirst(60);
         list.insertfirst(70);
+        System.out.println("Inserted 2 elements at first");
+
+        list.display();
+
+        list.insertat(2, 55);
+        System.out.println("Inserted an element at index 2");
 
         list.display();
 
         list.deletefirst();
         list.deletefirst();
+        System.out.println("deleted 2 elements at start");
+
+        list.display();
+
+        list.deleteat(3);
+        System.out.println("deleted element at index 3");
 
         list.display();
 
         list.deletelast();
         list.deletelast();
+        System.out.println("deleted 2 elements at last");
 
         list.display();
     }
