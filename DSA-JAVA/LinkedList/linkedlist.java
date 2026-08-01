@@ -109,6 +109,19 @@ public class linkedlist {
             }
             temp.next = temp.next.next;
         }
+
+        void reverselist() {
+            Node current = head;
+            Node previous = null;
+            Node next;
+            while (current != null) {
+                next = current.next;
+                current.next = previous;
+                previous = current;
+                current = next;
+            }
+            head = previous;
+        }
     }
 
     public static void main(String[] args) {
@@ -147,6 +160,11 @@ public class linkedlist {
         list.deletelast();
         list.deletelast();
         System.out.println("deleted 2 elements at last");
+
+        list.display();
+
+        list.reverselist();
+        System.out.println("reversing the list");
 
         list.display();
     }
