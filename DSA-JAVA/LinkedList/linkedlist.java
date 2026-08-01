@@ -135,6 +135,22 @@ public class linkedlist {
             }
             return slow.data;
         }
+
+        boolean iscycle() {
+            if (head == null) {
+                return false;
+            }
+            Node slow = head;
+            Node fast = head;
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+                if (slow == fast) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     public static void main(String[] args) {
@@ -182,5 +198,6 @@ public class linkedlist {
         list.display();
 
         System.out.println("Middle element is: " + list.findmiddle());
+        System.out.println("Is there a cycle?: " + list.iscycle());
     }
 }
