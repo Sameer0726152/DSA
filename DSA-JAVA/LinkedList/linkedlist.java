@@ -122,6 +122,19 @@ public class linkedlist {
             }
             head = previous;
         }
+
+        int findmiddle() {
+            if (head == null) {
+                return -1;
+            }
+            Node slow = head;
+            Node fast = head;
+            while (fast != null && fast.next != null) {
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            return slow.data;
+        }
     }
 
     public static void main(String[] args) {
@@ -167,5 +180,7 @@ public class linkedlist {
         System.out.println("reversing the list");
 
         list.display();
+
+        System.out.println("Middle element is: " + list.findmiddle());
     }
 }
