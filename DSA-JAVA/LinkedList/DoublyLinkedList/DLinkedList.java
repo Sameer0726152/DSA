@@ -60,6 +60,61 @@ public class DLinkedList {
             }
             System.out.println("");
         }
+
+        void deletefirst() {
+            if (head == null) {
+                return;
+            }
+            if (head == tail) {
+                head = null;
+                tail = null;
+                return;
+            }
+            head = head.next;
+            head.prev = null;
+        }
+
+        void deletelast() {
+            if (tail == null) {
+                return;
+            }
+            if (head == tail) {
+                head = null;
+                tail = null;
+                return;
+            }
+            tail = tail.prev;
+            tail.next = null;
+        }
+
+        void insertat(int key, int value) {
+            if (key < 0) {
+                return;
+            }
+            if (key == 0) {
+                insertfirst(value);
+                return;
+            }
+            Node temp = head;
+            for (int i = 0; i < key - 1; i++) {
+                if (temp == null) {
+                    return;
+                }
+                temp = temp.next;
+            }
+            if (temp == null) {
+                return;
+            }
+            if (temp.next == null) {
+                insertlast(value);
+                return;
+            }
+            Node newnode = new Node(value);
+            newnode.next = temp.next;
+            newnode.prev = temp;
+            temp.next.prev = newnode;
+            temp.next = newnode;
+        }
     }
 
     public static void main(String[] args) {
@@ -76,6 +131,18 @@ public class DLinkedList {
         list.insertfirst(10);
         System.out.println("3 Nodes added at front");
 
+        list.displayforward();
+
+        list.deletefirst();
+        System.out.println("deleted first element");
+        list.displayforward();
+
+        list.deletelast();
+        System.out.println("deleted last element");
+        list.displayforward();
+
+        list.insertat(3, 45);
+        list.displaybackward();
         list.displayforward();
 
     }
