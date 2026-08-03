@@ -115,6 +115,32 @@ public class DLinkedList {
             temp.next.prev = newnode;
             temp.next = newnode;
         }
+
+        void deleteat(int key) {
+            if (key < 0 || null == head) {
+                return;
+            }
+            if (key == 0) {
+                deletefirst();
+                return;
+            }
+            Node temp = head;
+            for (int i = 0; i < key; i++) {
+                if (temp == null) {
+                    return;
+                }
+                temp = temp.next;
+            }
+            if (temp == null) {
+                return;
+            }
+            if (temp == tail) {
+                deletelast();
+                return;
+            }
+            temp.prev.next = temp.next;
+            temp.next.prev = temp.prev;
+        }
     }
 
     public static void main(String[] args) {
@@ -142,8 +168,13 @@ public class DLinkedList {
         list.displayforward();
 
         list.insertat(3, 45);
+        System.out.println("Insert at index 3");
         list.displaybackward();
         list.displayforward();
 
+        list.deleteat(2);
+        System.out.println("delete at index 2");
+        list.displaybackward();
+        list.displayforward();
     }
 }
