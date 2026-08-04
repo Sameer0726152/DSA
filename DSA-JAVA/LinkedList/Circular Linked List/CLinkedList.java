@@ -39,6 +39,33 @@ public class CLinkedList {
             tail = newnode;
         }
 
+        void deletefirst() {
+            if (tail == null) {
+                return;
+            }
+            if (tail.next == tail) {
+                tail = null;
+                return;
+            }
+            tail.next = tail.next.next;
+        }
+
+        void deletelast() {
+            if (tail == null) {
+                return;
+            }
+            if (tail.next == tail) {
+                tail = null;
+                return;
+            }
+            Node temp = tail.next;
+            while (temp.next != tail) {
+                temp = temp.next;
+            }
+            temp.next = tail.next;
+            tail = temp;
+        }
+
         void display() {
             if (tail == null) {
                 return;
@@ -62,6 +89,14 @@ public class CLinkedList {
         list.insertlast(40);
         list.insertlast(50);
         list.insertlast(60);
+        list.display();
+
+        list.deletefirst();
+        list.deletefirst();
+        list.display();
+
+        list.deletelast();
+        list.deletelast();
         list.display();
     }
 }
