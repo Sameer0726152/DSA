@@ -51,6 +51,86 @@ public class DCLinkedList {
             tail = newnode;
         }
 
+        void insertat(int key, int value) {
+            if (key < 0) {
+                return;
+            }
+            if (key == 0) {
+                insertfirst(value);
+                return;
+            }
+            if (head == null) {
+                return;
+            }
+            Node temp = head;
+            for (int i = 0; i < key; i++) {
+                temp = temp.next;
+                if (temp == head && i < key - 1) {
+                    return;
+                }
+            }
+            if (temp == head) {
+                insertlast(value);
+                return;
+            }
+            Node newnode = new Node(value);
+            newnode.next = temp;
+            newnode.prev = temp.prev;
+            temp.prev.next = newnode;
+            temp.prev = newnode;
+        }
+
+        void deletefirst() {
+            if (head == null) {
+                return;
+            }
+            if (head == tail) {
+                head = null;
+                tail = null;
+                return;
+            }
+            head = head.next;
+            head.prev = tail;
+            tail.next = head;
+        }
+
+        void deletelast() {
+            if (head == null) {
+                return;
+            }
+            if (head == tail) {
+                head = null;
+                tail = null;
+                return;
+            }
+            tail = tail.prev;
+            tail.next = head;
+            head.prev = tail;
+        }
+
+        void deleteat(int key) {
+            if (key < 0 || head == null) {
+                return;
+            }
+            if (key == 0) {
+                deletefirst();
+                return;
+            }
+            Node temp = head;
+            for (int i = 0; i < key; i++) {
+                temp = temp.next;
+                if (temp == head) {
+                    return;
+                }
+            }
+            if (temp == tail) {
+                deletelast();
+                return;
+            }
+            temp.next.prev = temp.prev;
+            temp.prev.next = temp.next;
+        }
+
         void displayforward() {
             if (head == null) {
                 return;
@@ -89,5 +169,17 @@ public class DCLinkedList {
         list.insertlast(60);
         list.displayforward();
         list.displaybackward();
+
+        list.deletefirst();
+        list.displayforward();
+
+        list.deletelast();
+        list.displayforward();
+
+        list.insertat(1, 15);
+        list.displayforward();
+
+        list.deleteat(2);
+        list.displayforward();
     }
 }
