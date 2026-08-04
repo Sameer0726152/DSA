@@ -39,6 +39,37 @@ public class CLinkedList {
             tail = newnode;
         }
 
+        void insertat(int key, int value) {
+            if (key < 0) {
+                return;
+            }
+            if (key == 0) {
+                insertfirst(value);
+                return;
+            }
+            if (tail == null) {
+                return;
+            }
+            if (key == 0) {
+                insertfirst(value);
+                return;
+            }
+            Node temp = tail.next;
+            for (int i = 0; i < key - 1; i++) {
+                if (temp == tail) {
+                    return;
+                }
+                temp = temp.next;
+            }
+            if (temp == tail) {
+                insertlast(value);
+                return;
+            }
+            Node newnode = new Node(value);
+            newnode.next = temp.next;
+            temp.next = newnode;
+        }
+
         void deletefirst() {
             if (tail == null) {
                 return;
@@ -64,6 +95,31 @@ public class CLinkedList {
             }
             temp.next = tail.next;
             tail = temp;
+        }
+
+        void deleteat(int key) {
+            if (key < 0 || tail == null) {
+                return;
+            }
+            if (key == 0) {
+                deletefirst();
+                return;
+            }
+            Node temp = tail.next;
+            for (int i = 0; i < key - 1; i++) {
+                if (temp == tail) {
+                    return;
+                }
+                temp = temp.next;
+            }
+            if (temp == tail) {
+                return;
+            }
+            if (temp.next == tail) {
+                deletelast();
+                return;
+            }
+            temp.next = temp.next.next;
         }
 
         void display() {
@@ -97,6 +153,14 @@ public class CLinkedList {
 
         list.deletelast();
         list.deletelast();
+        list.display();
+
+        list.insertat(1, 25);
+        list.insertat(2, 45);
+        list.display();
+
+        list.deleteat(2);
+        list.deleteat(2);
         list.display();
     }
 }
