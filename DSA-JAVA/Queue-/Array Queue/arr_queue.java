@@ -1,5 +1,5 @@
 
-public class queue {
+public class arr_queue {
 
     private static class Queue {
 
