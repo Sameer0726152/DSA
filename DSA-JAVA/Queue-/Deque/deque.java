@@ -58,7 +58,7 @@ public class deque {
                 front = null;
                 rear = null;
                 size--;
-                return -1;
+                return value;
             }
             front = front.next;
             front.prev = null;
@@ -76,7 +76,7 @@ public class deque {
                 front = null;
                 rear = null;
                 size--;
-                return -1;
+                return value;
             }
             rear = rear.prev;
             rear.next = null;
