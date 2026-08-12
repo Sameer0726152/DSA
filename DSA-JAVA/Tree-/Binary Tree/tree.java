@@ -17,6 +17,30 @@ public class tree {
         }
     }
 
+    static int countnodes(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        return 1 + countnodes(root.left) + countnodes(root.right);
+    }
+
+    static int countleaves(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        return countleaves(root.left) + countleaves(root.right);
+    }
+
+    static int sum(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        return root.data + sum(root.left) + sum(root.right);
+    }
+
     static void preorder(Node root) {
         if (root == null) {
             return;
@@ -78,5 +102,8 @@ public class tree {
         postorder(root);
         System.out.println("\nLevelorder Traversal:");
         levelorder(root);
+        System.err.println("\n" + countnodes(root));
+        System.err.println("\n" + countleaves(root));
+        System.err.println("\n" + sum(root));
     }
 }
