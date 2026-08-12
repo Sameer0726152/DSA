@@ -1,4 +1,7 @@
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class tree {
 
     static class Node {
@@ -41,6 +44,24 @@ public class tree {
         System.out.print(root.data + " ");
     }
 
+    static void levelorder(Node root) {
+        Queue<Node> q = new LinkedList<>();
+        if (root == null) {
+            return;
+        }
+        q.offer(root);
+        while (!q.isEmpty()) {
+            Node cur = q.poll();
+            System.out.print(cur.data + " ");
+            if (cur.left != null) {
+                q.offer(cur.left);
+            }
+            if (cur.right != null) {
+                q.offer(cur.right);
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Node root = new Node(10);
         root.left = new Node(20);
@@ -55,5 +76,7 @@ public class tree {
         inorder(root);
         System.out.println("\nPostorder Traversal:");
         postorder(root);
+        System.out.println("\nLevelorder Traversal:");
+        levelorder(root);
     }
 }
