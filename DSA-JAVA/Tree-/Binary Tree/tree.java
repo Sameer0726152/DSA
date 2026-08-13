@@ -48,6 +48,16 @@ public class tree {
         return 1 + Math.max(height(root.left), height(root.right));
     }
 
+    static boolean search(Node root, int key) {
+        if (root == null) {
+            return false;
+        }
+        if (root.data == key) {
+            return true;
+        }
+        return search(root.left, key) || search(root.right, key);
+    }
+
     static void preorder(Node root) {
         if (root == null) {
             return;
@@ -113,5 +123,6 @@ public class tree {
         System.err.println("\n Total Leaves: " + countleaves(root));
         System.err.println("\n Sum of all Nodes: " + sum(root));
         System.err.println("\n Height of the Tree: " + height(root));
+        System.err.println("\n Is node 30 present?: " + search(root, 20));
     }
 }
