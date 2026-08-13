@@ -41,6 +41,13 @@ public class tree {
         return root.data + sum(root.left) + sum(root.right);
     }
 
+    static int height(Node root) {
+        if (root == null) {
+            return -1;
+        }
+        return 1 + Math.max(height(root.left), height(root.right));
+    }
+
     static void preorder(Node root) {
         if (root == null) {
             return;
@@ -102,8 +109,9 @@ public class tree {
         postorder(root);
         System.out.println("\nLevelorder Traversal:");
         levelorder(root);
-        System.err.println("\n" + countnodes(root));
-        System.err.println("\n" + countleaves(root));
-        System.err.println("\n" + sum(root));
+        System.err.println("\n Totaal Nodes: " + countnodes(root));
+        System.err.println("\n Total Leaves: " + countleaves(root));
+        System.err.println("\n Sum of all Nodes: " + sum(root));
+        System.err.println("\n Height of the Tree: " + height(root));
     }
 }
