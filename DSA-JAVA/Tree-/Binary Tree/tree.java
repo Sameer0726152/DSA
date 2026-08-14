@@ -48,6 +48,13 @@ public class tree {
         return 1 + Math.max(height(root.left), height(root.right));
     }
 
+    static int maxvalue(Node root) {
+        if (root == null) {
+            return -1;
+        }
+        return Math.max(root.data, Math.max(maxvalue(root.left), maxvalue(root.right)));
+    }
+
     static boolean search(Node root, int key) {
         if (root == null) {
             return false;
@@ -119,10 +126,11 @@ public class tree {
         postorder(root);
         System.out.println("\nLevelorder Traversal:");
         levelorder(root);
-        System.err.println("\n Totaal Nodes: " + countnodes(root));
-        System.err.println("\n Total Leaves: " + countleaves(root));
-        System.err.println("\n Sum of all Nodes: " + sum(root));
-        System.err.println("\n Height of the Tree: " + height(root));
-        System.err.println("\n Is node 30 present?: " + search(root, 20));
+        System.out.println("\n Totaal Nodes: " + countnodes(root));
+        System.out.println("\n Total Leaves: " + countleaves(root));
+        System.out.println("\n Sum of all Nodes: " + sum(root));
+        System.out.println("\n Height of the Tree: " + height(root));
+        System.out.println("\n Is node 30 present?: " + search(root, 20));
+        System.out.println("\n Maximum value: " + maxvalue(root));
     }
 }
