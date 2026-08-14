@@ -72,6 +72,17 @@ public class tree {
         return search(root.left, key) || search(root.right, key);
     }
 
+    static int countonechild(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int count = 0;
+        if ((root.left != null) ^ (root.right != null)) {
+            count = 1;
+        }
+        return count + countonechild(root.left) + countonechild(root.right);
+    }
+
     static void preorder(Node root) {
         if (root == null) {
             return;
@@ -140,5 +151,6 @@ public class tree {
         System.out.println("\n Is node 30 present?: " + search(root, 20));
         System.out.println("\n Maximum value: " + maxvalue(root));
         System.out.println("\n Minimum value: " + minvalue(root));
+        System.out.println("\n Total nodes with 1 child: " + countonechild(root));
     }
 }
