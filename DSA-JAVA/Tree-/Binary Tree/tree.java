@@ -83,6 +83,19 @@ public class tree {
         return count + countonechild(root.left) + countonechild(root.right);
     }
 
+    static boolean issametree(Node root1, Node root2) {
+        if (root1 == null && root2 == null) {
+            return true;
+        }
+        if (root1 == null || root2 == null) {
+            return false;
+        }
+        if (root1.data != root2.data) {
+            return false;
+        }
+        return issametree(root1.left, root2.left) && issametree(root1.right, root2.right);
+    }
+
     static void preorder(Node root) {
         if (root == null) {
             return;
@@ -129,28 +142,37 @@ public class tree {
     }
 
     public static void main(String[] args) {
-        Node root = new Node(10);
-        root.left = new Node(20);
-        root.right = new Node(30);
-        root.left.left = new Node(40);
-        root.left.right = new Node(50);
-        root.right.right = new Node(60);
-        root.left.left.left = new Node(70);
+        Node root1 = new Node(10);
+        root1.left = new Node(20);
+        root1.right = new Node(30);
+        root1.left.left = new Node(40);
+        root1.left.right = new Node(50);
+        root1.right.right = new Node(60);
+        root1.left.left.left = new Node(70);
+
+        Node root2 = new Node(10);
+        root2.left = new Node(20);
+        root2.right = new Node(30);
+        root2.left.left = new Node(40);
+        root2.left.right = new Node(50);
+        root2.right.right = new Node(60);
+        root2.left.left.left = new Node(70);
         System.out.println("Preorder Traversal:");
-        preorder(root);
+        preorder(root1);
         System.out.println("\nInorder Traversal:");
-        inorder(root);
+        inorder(root1);
         System.out.println("\nPostorder Traversal:");
-        postorder(root);
+        postorder(root1);
         System.out.println("\nLevelorder Traversal:");
-        levelorder(root);
-        System.out.println("\n Total Nodes: " + countnodes(root));
-        System.out.println("\n Total Leaves: " + countleaves(root));
-        System.out.println("\n Sum of all Nodes: " + sum(root));
-        System.out.println("\n Height of the Tree: " + height(root));
-        System.out.println("\n Is node 30 present?: " + search(root, 20));
-        System.out.println("\n Maximum value: " + maxvalue(root));
-        System.out.println("\n Minimum value: " + minvalue(root));
-        System.out.println("\n Total nodes with 1 child: " + countonechild(root));
+        levelorder(root1);
+        System.out.println("\n Total Nodes: " + countnodes(root1));
+        System.out.println("\n Total Leaves: " + countleaves(root1));
+        System.out.println("\n Sum of all Nodes: " + sum(root1));
+        System.out.println("\n Height of the Tree: " + height(root1));
+        System.out.println("\n Is node 30 present?: " + search(root1, 20));
+        System.out.println("\n Maximum value: " + maxvalue(root1));
+        System.out.println("\n Minimum value: " + minvalue(root1));
+        System.out.println("\n Total nodes with 1 child: " + countonechild(root1));
+        System.out.println("\n Are the 2 trees the same?: " + issametree(root1, root2));
     }
 }
