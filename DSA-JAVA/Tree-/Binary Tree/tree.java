@@ -96,6 +96,26 @@ public class tree {
         return issametree(root1.left, root2.left) && issametree(root1.right, root2.right);
     }
 
+    static boolean ismirror(Node left, Node right) {
+        if (left == null && right == null) {
+            return true;
+        }
+        if (left == null || right == null) {
+            return false;
+        }
+        if (left.data != right.data) {
+            return false;
+        }
+        return ismirror(left.left, right.right) && ismirror(left.right, right.left);
+    }
+
+    static boolean issymmetric(Node root) {
+        if (root == null) {
+            return true;
+        }
+        return ismirror(root.left, root.right);
+    }
+
     static void preorder(Node root) {
         if (root == null) {
             return;
@@ -174,5 +194,6 @@ public class tree {
         System.out.println("\n Minimum value: " + minvalue(root1));
         System.out.println("\n Total nodes with 1 child: " + countonechild(root1));
         System.out.println("\n Are the 2 trees the same?: " + issametree(root1, root2));
+        System.out.println("\n Is the 1st tree Symmetric?: " + issymmetric(root1));
     }
 }
