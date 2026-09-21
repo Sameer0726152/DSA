@@ -116,6 +116,19 @@ public class tree {
         return ismirror(root.left, root.right);
     }
 
+    static int maxPathSum = Integer.MIN_VALUE;
+
+    static int maxPathGain(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int leftsum = Math.max(0, maxPathGain(root.left));
+        int rightsum = Math.max(0, maxPathGain(root.right));
+        int curr = root.data + leftsum + rightsum;
+        maxPathSum = Math.max(maxPathSum, curr);
+        return root.data + Math.max(leftsum, rightsum);
+    }
+
     static void preorder(Node root) {
         if (root == null) {
             return;
@@ -195,5 +208,7 @@ public class tree {
         System.out.println("\n Total nodes with 1 child: " + countonechild(root1));
         System.out.println("\n Are the 2 trees the same?: " + issametree(root1, root2));
         System.out.println("\n Is the 1st tree Symmetric?: " + issymmetric(root1));
+        maxPathGain(root1);
+        System.out.println("\n Maximum Path Sum: " + maxPathSum);
     }
 }
