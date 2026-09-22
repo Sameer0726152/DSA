@@ -129,6 +129,19 @@ public class tree {
         return root.data + Math.max(leftsum, rightsum);
     }
 
+    static int diam = Integer.MIN_VALUE;
+
+    static int diameter(Node root) {
+        if (root == null) {
+            return -1;
+        }
+        int leftheight = diameter(root.left);
+        int rightheight = diameter(root.right);
+        int curr = leftheight + rightheight + 2;
+        diam = Math.max(diam, curr);
+        return 1 + Math.max(leftheight, rightheight);
+    }
+
     static void preorder(Node root) {
         if (root == null) {
             return;
@@ -202,7 +215,7 @@ public class tree {
         System.out.println("\n Total Leaves: " + countleaves(root1));
         System.out.println("\n Sum of all Nodes: " + sum(root1));
         System.out.println("\n Height of the Tree: " + height(root1));
-        System.out.println("\n Is node 30 present?: " + search(root1, 20));
+        System.out.println("\n Is node 30 present?: " + search(root1, 30));
         System.out.println("\n Maximum value: " + maxvalue(root1));
         System.out.println("\n Minimum value: " + minvalue(root1));
         System.out.println("\n Total nodes with 1 child: " + countonechild(root1));
@@ -210,5 +223,7 @@ public class tree {
         System.out.println("\n Is the 1st tree Symmetric?: " + issymmetric(root1));
         maxPathGain(root1);
         System.out.println("\n Maximum Path Sum: " + maxPathSum);
+        diameter(root1);
+        System.out.println("\n Diameter of the Tree: " + diam);
     }
 }
