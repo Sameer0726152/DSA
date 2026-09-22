@@ -116,7 +116,7 @@ public class tree {
         return ismirror(root.left, root.right);
     }
 
-    static int maxPathSum = Integer.MIN_VALUE;
+    static int maxPathSum = 0;
 
     static int maxPathGain(Node root) {
         if (root == null) {
@@ -129,7 +129,7 @@ public class tree {
         return root.data + Math.max(leftsum, rightsum);
     }
 
-    static int diam = Integer.MIN_VALUE;
+    static int diam = 0;
 
     static int diameter(Node root) {
         if (root == null) {
@@ -140,6 +140,24 @@ public class tree {
         int curr = leftheight + rightheight + 2;
         diam = Math.max(diam, curr);
         return 1 + Math.max(leftheight, rightheight);
+    }
+
+    static Node LCA(Node root, Node p, Node q) {
+        if (root == null) {
+            return null;
+        }
+        if (root == p || root == q) {
+            return root;
+        }
+        Node left = LCA(root.left, p, q);
+        Node right = LCA(root.right, p, q);
+        if (left != null && right != null) {
+            return root;
+        }
+        if (left != null) {
+            return left;
+        }
+        return right;
     }
 
     static void preorder(Node root) {
@@ -195,6 +213,8 @@ public class tree {
         root1.left.right = new Node(50);
         root1.right.right = new Node(60);
         root1.left.left.left = new Node(70);
+        Node node70 = root1.left.left.left;
+        Node node50 = root1.left.right;
 
         Node root2 = new Node(10);
         root2.left = new Node(20);
@@ -223,7 +243,10 @@ public class tree {
         System.out.println("\n Is the 1st tree Symmetric?: " + issymmetric(root1));
         maxPathGain(root1);
         System.out.println("\n Maximum Path Sum: " + maxPathSum);
+        maxPathSum = 0;
         diameter(root1);
         System.out.println("\n Diameter of the Tree: " + diam);
+        diam = 0;
+        System.out.println("\n Lowest Common Ancestor of Node 70 and 50: " + LCA(root1, node70, node50).data);
     }
 }
