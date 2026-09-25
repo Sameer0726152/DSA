@@ -59,6 +59,28 @@ public class bintree {
         return root.data;
     }
 
+    static Node delete(Node root, int key) {
+        if (root == null) {
+            return null;
+        }
+        if (key < root.data) {
+            root.left = delete(root.left, key);
+        } else if (key > root.data) {
+            root.right = delete(root.right, key);
+        } else {
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            } else {
+                int minValue = minimum(root.right);
+                root.data = minValue;
+                root.right = delete(root.right, minValue);
+            }
+        }
+        return root;
+    }
+
     static void inorder(Node root) {
         if (root == null) {
             return;
@@ -79,5 +101,11 @@ public class bintree {
         inorder(root);
         System.out.println("\nIs 60 present: " + searchbst(root, 60));
         System.out.println("Minimum and Maximum values are: " + minimum(root) + " and " + maximum(root));
+        System.out.println("Deleting 20");
+        root = delete(root, 20);
+        inorder(root);
+        root = insert(root, 20);
+        System.out.println("\nInserting 20");
+        inorder(root);
     }
 }
