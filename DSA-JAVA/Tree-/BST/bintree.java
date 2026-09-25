@@ -39,6 +39,26 @@ public class bintree {
         return root;
     }
 
+    static int minimum(Node root) {
+        if (root == null) {
+            return -1;
+        }
+        while (root.left != null) {
+            root = root.left;
+        }
+        return root.data;
+    }
+
+    static int maximum(Node root) {
+        if (root == null) {
+            return -1;
+        }
+        while (root.right != null) {
+            root = root.right;
+        }
+        return root.data;
+    }
+
     static void inorder(Node root) {
         if (root == null) {
             return;
@@ -58,5 +78,6 @@ public class bintree {
         root = insert(root, 10);
         inorder(root);
         System.out.println("\nIs 60 present: " + searchbst(root, 60));
+        System.out.println("Minimum and Maximum values are: " + minimum(root) + " and " + maximum(root));
     }
 }
