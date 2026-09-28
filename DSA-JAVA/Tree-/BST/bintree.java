@@ -90,6 +90,40 @@ public class bintree {
         inorder(root.right);
     }
 
+    static int count = 0;
+    static int answer = -1;
+
+    static void kthsmallest(Node root, int k) {
+        if (root == null) {
+            return;
+        }
+        kthsmallest(root.left, k);
+        count++;
+        if (count == k) {
+            answer = root.data;
+            return;
+        }
+        kthsmallest(root.right, k);
+    }
+
+    static void reset() {
+        count = 0;
+        answer = -1;
+    }
+
+    static void kthlargest(Node root, int k) {
+        if (root == null) {
+            return;
+        }
+        kthlargest(root.right, k);
+        count++;
+        if (count == k) {
+            answer = root.data;
+            return;
+        }
+        kthlargest(root.left, k);
+    }
+
     public static void main(String[] args) {
         Node root = new Node(50);
         root = insert(root, 30);
@@ -107,5 +141,10 @@ public class bintree {
         root = insert(root, 20);
         System.out.println("\nInserting 20");
         inorder(root);
+        kthsmallest(root, 3);
+        System.out.println("\n3rd smallest element is: " + answer);
+        reset();
+        kthlargest(root, 3);
+        System.out.println("3rd largest element is: " + answer);
     }
 }
