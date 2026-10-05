@@ -124,6 +124,16 @@ public class bintree {
         kthlargest(root.left, k);
     }
 
+    static boolean isvalid(Node root, int min, int max) {
+        if (root == null) {
+            return true;
+        }
+        if (root.data < min || root.data > max) {
+            return false;
+        }
+        return isvalid(root.left, min, root.data) && isvalid(root.right, root.data, max);
+    }
+
     public static void main(String[] args) {
         Node root = new Node(50);
         root = insert(root, 30);
@@ -146,5 +156,6 @@ public class bintree {
         reset();
         kthlargest(root, 3);
         System.out.println("3rd largest element is: " + answer);
+        System.out.println("Is the tree valid BST: " + isvalid(root, Integer.MIN_VALUE, Integer.MAX_VALUE));
     }
 }
